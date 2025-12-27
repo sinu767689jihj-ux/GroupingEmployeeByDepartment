@@ -1,0 +1,74 @@
+package GroupingEmployeesByDepartment;
+public class Student {
+    private int rollNo;
+    private String name;
+    private int marks;
+    private String grade;
+    Student(int rollNo,String name,int marks,String grade)
+    {
+
+        this.rollNo=rollNo;
+        this.name=name;
+        this.marks=marks;
+        this.grade=grade;
+    }
+    int getRollNo()
+    {
+        return rollNo;
+    }
+    String getName()
+    {
+        return name;
+    }
+    int getMarks()
+    {
+        return marks;
+    }
+    String getGrade()
+    {
+        return grade;
+    }
+    public String toString()
+    {
+        return "["+"RollNo"+rollNo+"Name"+name+"Marks"+marks+"Grade"+grade+"]";
+    }
+}
+package GroupingEmployeesByDepartment;
+import java.util.stream.Collectors;
+import java.util.LinkedList;
+import java.util.Map;
+public class AllStudentsMarks{
+    public static LinkedList<Student>getAllStudentsGrades()
+    {
+        Student s1=new Student(1,"Aarif",65,"B");
+        Student s2=new Student(2,"Nawal",65,"Fail");
+        Student s3=new Student(3,"Suresh",65,"Fail");
+        Student s4=new Student(4,"Uzma",80,"B");
+        Student s5=new Student(5,"Shareefa",85,"B+");
+        Student s6=new Student(6,"Rahul",70,"A+");
+        Student s7=new Student(7,"Zara",70,"B");
+        Student s8=new Student(8,"Ramesh",80,"B+");
+        Student s9=new Student(9,"Raj",90,"Fail");
+        Student s10=new Student(10,"Sneha",60,"B");
+        LinkedList<Student> students=new LinkedList<>();
+        students.add(s1);
+        students.add(s2);
+        students.add(s3);
+        students.add(s4);
+        students.add(s5);
+        students.add(s6);
+        students.add(s7);
+        students.add(s8);
+        students.add(s9);
+        students.add(s10);
+        return students;
+    }
+    public static void main(String[] args)
+    {
+        LinkedList<Student> students=getAllStudentsGrades();
+        Map<Integer,String> FaliureStudents=students
+        .stream()
+        .collect(Collectors.groupingBy(s->s.getMarks(),Collectors.mapping(Student::getName,Collectors.joining("->"))));
+        System.out.println(FaliureStudents);
+    }
+}
